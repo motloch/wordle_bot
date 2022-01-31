@@ -4,10 +4,15 @@ A bot that solves a Wordle riddle based on a series of user inputs that encodes 
 Example run:
 
 My guess is "ROATE", what is the result? (Green = g, Yellow = y, Gray = x; Example: gyxxy)
+
 Result: yyxxx
+
 My guess is "CUNDY", what is the result? (Green = g, Yellow = y, Gray = x; Example: gyxxy)
+
 Result: xxxxx
+
 My guess is "GIMPS", what is the result? (Green = g, Yellow = y, Gray = x; Example: gyxxy)
+
 Result: xyxyx
 
 Solution is:  PRIOR
