@@ -23,7 +23,9 @@ def which_compatible(solns, letters_present, guess, message):
         elif message[i] == 'y':
             filt *= letters_present[:, guess[i]]
         # i-th letter is gray -> this letter must be absent in the solution
-        else:
+        # (assuming this letter is not present in guess twice and the other
+        # occurrence is yellow/green)
+        elif (guess[i] not in guess[:i]) and (guess[i] not in guess[(i+1):]):
             filt *= np.logical_not(letters_present[:, guess[i]])
 
     # Return only the solutions compatible with the message

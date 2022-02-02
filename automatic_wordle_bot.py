@@ -1,5 +1,5 @@
 from selenium.webdriver import Chrome
-from website_interactions import initial_click, get_key_buttons, get_results
+from website_interactions import initial_click, get_key_buttons, get_result
 import time
 import numpy as np
 from wordle_io import load_words_as_array_of_int, read_user_input
@@ -32,25 +32,34 @@ guess = 'roate'
 guess_arr = [ord(x) - ORD_A for x in guess]
 line_no = 1
 
-# Continue until we have only one solution left
-while len(solns) > 1:
+not_solved = True
 
+# Continue until we have only one solution left
+while not_solved:
+
+    print('Guessing: ', guess)
     for c in guess:
         buttons[c].click()
     buttons['enter'].click()
 
     time.sleep(DELAY)
 
-    user_input = get_results(driver, line_no)
+    result = get_result(driver, line_no)
+    print('Result: ', result)
     line_no += 1
+    if result == 'ggggg':
+        not_solved = False
 
     # Discard noncompatible solutions
-    filt = which_compatible(solns, letters_present, guess_arr, user_input)
+    filt = which_compatible(solns, letters_present, guess_arr, result)
     solns = solns[filt] 
     letters_present = letters_present[filt]
 
-    guess, guess_arr = find_next_guess(wlist, solns, letters_present)
-    print(guess)
+    if len(solns) == 1:
+        guess_arr = solns[0]
+        guess = ''.join([chr(ORD_A + c) for c in solns[0]])
+    else:
+        guess, guess_arr = find_next_guess(wlist, solns, letters_present)
 
 solution = ''.join([chr(ORD_A + c) for c in solns[0]]).upper()
 print('\nSolution is: ', solution)

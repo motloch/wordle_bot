@@ -40,7 +40,7 @@ def get_key_buttons(driver):
 
     return buttons
 
-def get_results(driver, line_no):
+def get_result(driver, line_no):
     """
     """
     #Find the elements in which the results are displayed
