@@ -1,5 +1,10 @@
 # wordle_bot
-A bot that solves a Wordle riddle based on a series of user inputs that encodes the green/yellow/gray squares provided by the website.
+A bot that solves a Wordle riddle. 
+
+The script automatic_wordle_bot.py uses selenium to interact with the official website and
+solve the riddle in a browser.
+
+The script wordle_bot.py assumes a series of user inputs that encodes the green/yellow/gray squares provided by the website.
 
 Example run:
 
