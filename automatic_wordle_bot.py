@@ -21,7 +21,6 @@ except:
     service = Service(chromedriver_path)
     service.start()
     driver = webdriver.Remote(service.service_url)
-    #driver = Chrome(chromedriver_path)
 driver.get("https://www.powerlanguage.co.uk/wordle/")
 
 # Get rid of the help element blocking the view
@@ -40,6 +39,9 @@ letters_present = np.zeros((NS, NCHAR), dtype = 'bool')
 for i, sol in enumerate(solns):
     for lett in sol:
         letters_present[i, lett] = True
+
+# Result to tweet
+tweet = ''
 
 # Pick ROATE as the first guess. 
 guess = 'roate'
@@ -64,6 +66,7 @@ while not_solved:
 
     # Read off the result (example: gyxxy)
     result = get_result(driver, guess_no)
+    tweet += result + '\n'
     print('Result: ', result)
 
     guess_no += 1
@@ -85,3 +88,6 @@ while not_solved:
 # Output the final solution one more time
 solution = ''.join([chr(ORD_A + c) for c in solns[0]]).upper()
 print('\nSolution is: ', solution)
+
+from twitter_interaction import send_tweet
+send_tweet(tweet)
