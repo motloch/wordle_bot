@@ -2,6 +2,7 @@
 Script that uses selenium to solve today's Wordle challenge
 """
 from selenium.webdriver import Chrome
+from selenium import webdriver
 from website_interactions import initial_click, get_key_buttons, get_result
 import time
 import numpy as np
@@ -10,8 +11,17 @@ from utils import which_compatible, find_next_guess
 from constants import NCHAR, ORD_A, DELAY
 
 # Needs Chrome installed!
-chromedriver_path = open('chromedriver_location.txt').read().replace('\n','')
-driver = Chrome(chromedriver_path)
+try:
+    driver = Chrome()
+except:
+    print('Trying chromedriver installed in the path from "chromedriver_location.txt"\n')
+    chromedriver_path = open('chromedriver_location.txt').readline().replace('\n','')
+
+    from selenium.webdriver.chrome.service import Service
+    service = Service(chromedriver_path)
+    service.start()
+    driver = webdriver.Remote(service.service_url)
+    #driver = Chrome(chromedriver_path)
 driver.get("https://www.powerlanguage.co.uk/wordle/")
 
 # Get rid of the help element blocking the view
