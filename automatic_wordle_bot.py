@@ -10,7 +10,8 @@ from utils import which_compatible, find_next_guess
 from constants import NCHAR, ORD_A, DELAY
 
 # Needs Chrome installed!
-driver = Chrome()
+chromedriver_path = open('chromedriver_location.txt').read().replace('\n','')
+driver = Chrome(chromedriver_path)
 driver.get("https://www.powerlanguage.co.uk/wordle/")
 
 # Get rid of the help element blocking the view
