@@ -14,8 +14,8 @@ from constants import NCHAR, ORD_A, DELAY
 try:
     driver = Chrome()
 except:
-    print('Trying chromedriver installed in the path from "chromedriver_location.txt"\n')
-    chromedriver_path = open('chromedriver_location.txt').readline().replace('\n','')
+    print("Trying to use chromedriver from the script's folder\n")
+    chromedriver_path = './chromedriver'
 
     from selenium.webdriver.chrome.service import Service
     service = Service(chromedriver_path)
