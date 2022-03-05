@@ -1,5 +1,6 @@
 import tweepy
 import yaml
+from datetime import date
 
 # Load the authorization keys
 try:
@@ -30,7 +31,8 @@ def send_tweet(tweet):
     formatted_tweet = ''.join([twitter_dict.get(c, c) for c in tweet])
 
     # Add introduction
-    formatted_tweet = "Solution of today's Wordle obtained by my bot:\n" + formatted_tweet
+    today = str(date.today())
+    formatted_tweet = "Solution of Wordle obtained by my bot for " + today + ":\n" + formatted_tweet
 
     # Create a client and tweet
     client = tweepy.Client(
